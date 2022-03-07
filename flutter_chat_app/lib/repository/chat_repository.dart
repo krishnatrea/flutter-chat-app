@@ -20,7 +20,6 @@ class ChatRepository {
         quarryperam: {"userId": userid},
         context: context);
     getChatRooms = getChatRoomsFromMap(response);
-    print(getChatRooms != null);
     return getChatRooms != null;
   }
 

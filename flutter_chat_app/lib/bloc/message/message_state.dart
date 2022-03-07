@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_chat_app/models/message.dart';
 
 abstract class MessageState extends Equatable {
   MessageState();
@@ -18,15 +19,15 @@ class UnMessageState extends MessageState {
 
 /// Initialized
 class InMessageState extends MessageState {
-  InMessageState(this.hello);
+  InMessageState(this.message);
   
-  final String hello;
+  final Message message;
 
   @override
-  String toString() => 'InMessageState $hello';
+  String toString() => 'InMessageState $message';
 
   @override
-  List<Object> get props => [hello];
+  List<Object> get props => [message];
 }
 
 class ErrorMessageState extends MessageState {
@@ -39,4 +40,16 @@ class ErrorMessageState extends MessageState {
 
   @override
   List<Object> get props => [errorMessage];
+}
+
+class JoinedChannalState extends MessageState {
+  JoinedChannalState(this.channel);
+  
+  final String channel;
+
+  @override
+  String toString() => 'JoinedChannalState $channel';
+
+  @override
+  List<Object> get props => [channel];
 }

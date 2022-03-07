@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/repository/chat_repository.dart';
 import 'package:flutter_chat_app/repository/user_repository.dart';
+import 'package:flutter_chat_app/screen/chat_page.dart';
 import 'package:flutter_chat_app/screen/create_chat_screen.dart';
+import 'package:flutter_chat_app/service/socket.dart';
 
 class ChatsPage extends StatefulWidget {
   @override
@@ -21,8 +23,9 @@ class _ChatsPageState extends State<ChatsPage> {
 
   @override
   void initState() {
-    loading();
     super.initState();
+    loading();
+    CustomSocket.instance.connect(UserRepository.instance.user!.token, context);
   }
 
   @override
@@ -41,7 +44,7 @@ class _ChatsPageState extends State<ChatsPage> {
                 title: Text(ChatRepository.instance.getChatRooms!.chatrooms[index].name),
                 subtitle: Text(ChatRepository.instance.getChatRooms!.chatrooms[index].members.length.toString() + ' members'),
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => CreateChatScreen(ChatRepository.instance.getChatRooms!.chatrooms[index])));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen(chatroom: ChatRepository.instance.getChatRooms!.chatrooms[index])));
                 },
               );
            },),

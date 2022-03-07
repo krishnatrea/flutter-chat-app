@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_chat_app/bloc/message/index.dart';
 import 'package:flutter_chat_app/screen/login_page.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-late IO.Socket socket ;
-
-void connect() {
-
-  
-  socket.onError((_) {
-    print("error");
-  });
-  print(socket.connected);
-}
+import 'package:flutter_chat_app/service/socket.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,12 +14,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (context) => MessageBloc(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: LoginPage(),
       ),
-      home:  LoginPage(),
     );
   }
 }

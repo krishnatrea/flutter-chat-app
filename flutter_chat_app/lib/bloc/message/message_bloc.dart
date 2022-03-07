@@ -7,7 +7,7 @@ import 'package:bloc/bloc.dart';
 
 class MessageBloc extends Bloc<MessageEvent, MessageState> {
 
-  MessageBloc(MessageState initialState) : super(initialState){
+  MessageBloc() : super(UnMessageState()){
    on<MessageEvent>((event, emit) {
       return emit.forEach<MessageState>(
         event.applyAsync(currentState: state, bloc: this),
